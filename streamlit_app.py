@@ -161,8 +161,14 @@ with col3:
     st.caption("Under construction or vacant land")
 
 with col4:
-    st.metric("Sendable Leads", f"{total_sendable:,}",
-              f"{int(avg_daily_sendable)}/day avg")
+    sendable_tooltip = (
+        "Sendable = export rows (property–agent pairs with valid address). "
+        "4,397 rows → ~3,226 unique emails after dedup. "
+        "The drop to actually sent (e.g. 2,155) is from VA verification (invalid emails removed), dedup, and only part of the list used in these campaigns."
+    )
+    with st.tooltip(sendable_tooltip):
+        st.metric("Sendable Leads", f"{total_sendable:,}",
+                  f"{int(avg_daily_sendable)}/day avg")
     st.caption("With email + valid address")
 
 with col5:
